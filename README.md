@@ -5,7 +5,7 @@ Event
 
 User
 
--   expenses
+-   expenses -> DebtorExpense -> Expense[]
 
 DebtorExpense
 
@@ -18,6 +18,9 @@ Expense
 
 -   event_id
 -   user_id
+-   name
+-   amount
+
 -   creditor -> User
 -   debtors -> DebtorExpense -> User[]
 -   event
