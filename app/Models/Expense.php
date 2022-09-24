@@ -24,8 +24,8 @@ class Expense extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function participants()
+    public function users()
     {
-        return $this->belongsToMany(User::class, 'expense_user');
+        return $this->belongsToMany(User::class);
     }
 }

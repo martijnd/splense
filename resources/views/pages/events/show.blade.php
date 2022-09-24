@@ -18,7 +18,10 @@
                         <h2>Closed at {{ $event->ended_at?->format('d-m-Y') }}</h2>
                     @endif
 
-                    <h2 class="mt-2 font-semibold text-xl">Expenses</h2>
+                    <div class="flex justify-between items-center">
+                        <h2 class="mt-2 font-semibold text-xl">Expenses</h2>
+                        <a href="{{ route('events.show.result', $event->id) }}">Results</a>
+                    </div>
                     <div>
 
                         @if ($event->expenses->count() === 0)
