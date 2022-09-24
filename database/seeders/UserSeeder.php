@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
             ->create(['event_id' => $event->id]);
 
         // Add all users as participants to the expenses
-        $expenses->each(fn ($expense) => $expense->participants()->attach($users->pluck('id')));
+        $expenses->each(fn ($expense) => $expense->users()->attach($users->pluck('id')));
 
         // $user = User::factory()
         //     ->has(

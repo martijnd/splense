@@ -42,7 +42,7 @@
                                         <div class="col-span-2">€
                                             {{ number_format($expense->amount / 100, 2, ',', '.') }}</div>
                                         <div class="col-span-2">{{ $expense->created_at->format('d-m-y') }}</div>
-                                        <div class="col-span-4">{{ $expense->participants->map->name->join(', ') }}
+                                        <div class="col-span-4">{{ $expense->users->map->name->join(', ') }}
                                         </div>
                                     </div>
                                 @endforeach

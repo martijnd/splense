@@ -79,14 +79,14 @@ class EventController extends Controller
             }
             $debtors = $users->filter(fn ($user) => $user->balance < 0);
 
-            $incoming = [];
+            $incoming = collect([]);
 
             $debtors->each(function ($debtor) use ($user, &$incoming) {
                 if ($user->balance > 0 && $debtor->balance < 0) {
                     $amount = min(abs($debtor->balance), $user->balance);
-                    $incoming = [...$incoming, ['id' => $debtor->id, 'amount' => $amount]];
+                    $incoming = collect([...$incoming, ['id' => $debtor->id, 'amount' => $amount]]);
                     $debtor->balance = $debtor->balance + $amount;
-                    $debtor->outgoing = [...($debtor->outgoing ?? []), ['id' => $user->id, 'amount' => $amount]];
+                    $debtor->outgoing = collect([...($debtor->outgoing ?? []), ['id' => $user->id, 'amount' => $amount]]);
                     $user->balance = $user->balance - $amount;
                 }
             });
@@ -101,7 +101,7 @@ class EventController extends Controller
         $balance = $this->getBalance($event);
         $users = $this->getResult($balance);
 
-        return view('pages.events.result', ['users' => $users]);
+        return view('pages.events.result', ['users' => $users, 'event' => $event]);
     }
 
     /**
