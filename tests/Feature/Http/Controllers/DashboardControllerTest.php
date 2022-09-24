@@ -1,7 +1,15 @@
 <?php
 
-test('example', function () {
-    $response = actingAs()->get('/');
+use App\Models\Event;
+use App\Models\User;
 
-    $response->assertStatus(200);
+it('should display a list of events', function () {
+    $user = User::factory()
+        ->has(Event::factory()->count(1))
+        ->create();
+
+    $response = actingAs($user)->get('/');
+
+    $response->assertStatus(200)
+        ->assertSee($user->events()->first()->title);
 });

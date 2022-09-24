@@ -12,7 +12,6 @@
 */
 
 use App\Models\User;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(Tests\TestCase::class, RefreshDatabase::class)->in('Feature');
@@ -48,7 +47,7 @@ expect()->extend('toBeOne', function () {
  *
  * @return TestCase
  */
-function actingAs(Authenticatable $user = null, string $driver = null)
+function actingAs(User $user = null, string $driver = null)
 {
     return test()->actingAs($user ?? User::factory()->create(), $driver);
 }

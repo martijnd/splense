@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Event as ModelsEvent;
+use App\Models\Event;
+use App\Models\Expense;
 use App\Models\User;
-use Event;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -17,13 +16,25 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()
-            ->has(ModelsEvent::factory()->count(3))
+        $user = User::factory()
+            ->has(
+                Event::factory()
+                    ->count(3)
+                    ->has(
+                        Expense::factory()
+                            ->count(10)
+                            ->has(
+                                User::factory()->count(5),
+                                'participants'
+                            ),
+                    )
+                    ->state(function ($attributes, User $user) {
+                        return ['user_id' => $user->id];
+                    })
+            )
             ->create([
                 'email' => 'martijn.dorsman@gmail.com',
                 'name' => 'Martijn Dorsman'
             ]);
-
-        User::factory(10)->create();
     }
 }

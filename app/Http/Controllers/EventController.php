@@ -5,19 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
+use Illuminate\Http\Response;
 
 class EventController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -47,7 +38,13 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        if (request()->user()->cannot('view', $event)) {
+            abort(Response::HTTP_UNAUTHORIZED);
+        }
+
+        $event->load('creator');
+
+        return view('pages.events.show', ['event' => $event]);
     }
 
     /**
@@ -58,7 +55,9 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        if (request()->user()->cannot('view', $event)) {
+            abort(Response::HTTP_UNAUTHORIZED);
+        }
     }
 
     /**

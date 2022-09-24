@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
     Route::get('/', DashboardController::class)->name('dashboard');
-    Route::resource('events', EventController::class);
+    Route::resource('events', EventController::class)->except('index');
 });
 
 require __DIR__ . '/auth.php';

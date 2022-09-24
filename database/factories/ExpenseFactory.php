@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,6 +18,8 @@ class ExpenseFactory extends Factory
     public function definition()
     {
         return [
+            'title' => $this->faker->word(),
+            'user_id' => User::factory(),
             'amount' => $this->faker->numberBetween(0, 10000),
         ];
     }

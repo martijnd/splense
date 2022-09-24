@@ -30,7 +30,7 @@ class EventPolicy
      */
     public function view(User $user, Event $event)
     {
-        //
+        return $user->events->firstWhere('id', $event->id);
     }
 
     /**
@@ -53,7 +53,7 @@ class EventPolicy
      */
     public function update(User $user, Event $event)
     {
-        //
+        return $user->id === $event->id;
     }
 
     /**
