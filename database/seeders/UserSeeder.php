@@ -36,26 +36,5 @@ class UserSeeder extends Seeder
 
         // Add all users as participants to the expenses
         $expenses->each(fn ($expense) => $expense->users()->attach($users->pluck('id')));
-
-        // $user = User::factory()
-        //     ->has(
-        //         Event::factory()
-        //             ->count(3)
-        //             ->has(
-        //                 Expense::factory()
-        //                     ->count(10)
-        //                     ->has(
-        //                         User::factory()->count(5),
-        //                         'participants'
-        //                     ),
-        //             )
-        //             ->state(function ($attributes, User $user) {
-        //                 return ['user_id' => $user->id];
-        //             })
-        //     )
-        //     ->create([
-        //         'email' => 'martijn.dorsman@gmail.com',
-        //         'name' => 'Martijn Dorsman'
-        //     ]);
     }
 }
