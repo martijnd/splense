@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
+use App\Mail\AddedToEvent;
 use App\Models\Event;
 use App\Models\Expense;
 use App\Models\User;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 
 class EventController extends Controller
 {
@@ -18,7 +20,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.events.create');
     }
 
     /**
@@ -29,7 +31,16 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        //
+        $event = Event::create([
+            'title' => $request->input('title'),
+            'user_id' => $request->user()->id
+        ]);
+
+        $event->users()->attach($request->user()->id);
+
+        Mail::to($request->email)->send(new AddedToEvent(request()->user(), $event));
+
+        return to_route('events.show', $event->id);
     }
 
     /**

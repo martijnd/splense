@@ -9,7 +9,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <h1 class="font-bold">Events</h1>
+                    <div class="flex justify-between items-center">
+                        <h1 class="font-bold">Events</h1>
+                        <a href="{{ route('events.create') }}">Create new event</a>
+                    </div>
                     <ul>
                         @foreach ($events as $event)
                             <li><a href="{{ route('events.show', $event->id) }}">{{ $event->title }}</a></li>
