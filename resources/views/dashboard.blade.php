@@ -17,7 +17,8 @@
                     <div class="p-4 bg-white">
                         <a href="{{ route('events.show', $event->id) }}">
                             <h2 class="font-semibold">{{ $event->title }}</h2>
-                            <h3 class="italic">{{ $event->users()->count() }} participants</h3>
+                            <h3 class="italic">{{ $event->users()->count() }}
+                                {{ $event->users()->count() === 1 ? 'participant' : 'participants' }}</h3>
                         </a>
                     </div>
                 </div>
