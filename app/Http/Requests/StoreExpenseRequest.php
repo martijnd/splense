@@ -13,7 +13,7 @@ class StoreExpenseRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class StoreExpenseRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|string|max:255',
+            'amount' => "required|regex:/^\d+(\.\d{1,2})?$/",
+            'users' => 'required|array|min:1'
         ];
     }
 }

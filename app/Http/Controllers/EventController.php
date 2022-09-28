@@ -8,6 +8,7 @@ use App\Mail\AddedToEvent;
 use App\Models\Event;
 use App\Models\Expense;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
 

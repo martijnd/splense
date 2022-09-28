@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreExpenseRequest;
 use App\Http\Requests\UpdateExpenseRequest;
+use App\Models\Event;
 use App\Models\Expense;
 
 class ExpenseController extends Controller
@@ -23,9 +24,11 @@ class ExpenseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Event $event)
     {
-        //
+        $event = $event->load('users');
+
+        return view('pages.events.expenses.create', ['event' => $event]);
     }
 
     /**
@@ -34,9 +37,18 @@ class ExpenseController extends Controller
      * @param  \App\Http\Requests\StoreExpenseRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreExpenseRequest $request)
+    public function store(Event $event, StoreExpenseRequest $request)
     {
-        //
+        $expense = Expense::create([
+            'title' => $request->input('title'),
+            'amount' => $request->input('amount') * 100,
+            'event_id' => $event->id,
+            'user_id' => auth()->id(),
+        ]);
+
+        $expense->users()->attach(collect($request->input('users'))->keys());
+
+        return view('pages.events.show', ['event' => $event]);
     }
 
     /**

@@ -12,6 +12,8 @@ class Expense extends Model
     protected $fillable = [
         'title',
         'amount',
+        'event_id',
+        'user_id',
     ];
 
     public function event()
