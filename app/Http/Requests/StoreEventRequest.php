@@ -16,6 +16,16 @@ class StoreEventRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        if (sizeof($this->emails) === 1 && $this->emails[0] === null) {
+
+            $this->merge([
+                'emails' => null,
+            ]);
+        }
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *

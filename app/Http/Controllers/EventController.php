@@ -38,9 +38,7 @@ class EventController extends Controller
             'user_id' => $request->user()->id
         ]);
 
-
         $event->users()->attach($request->user()->id);
-
 
         collect($request->validated()['emails'])->each(
             function ($email) use ($event) {
