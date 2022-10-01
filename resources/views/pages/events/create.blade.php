@@ -9,29 +9,29 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <h1 class="font-bold">Create a new event</h1>
+                    <h1 class="font-bold">{{ __('Create a new event') }}</h1>
                     <form class="grid grid-cols-2 md:w-1/2 gap-4 mt-4 items-center" action="{{ route('events.store') }}"
                         method="POST">
                         @csrf
                         <label for="title">
-                            Title
+                            {{ __('Title') }}
                         </label>
                         <div>
-                          <input type="text" name="title" id="title" placeholder="Title">
-                          @error('title')
-                              <div class="text-red-500 mt-2">{{ $message }}</div>
-                          @enderror
+                            <input type="text" name="title" id="title" placeholder="Title">
+                            @error('title')
+                                <div class="text-red-500 mt-2">{{ $message }}</div>
+                            @enderror
                         </div>
                         <label for="email">
-                            Email
+                            {{ __('Email') }}
                         </label>
                         <div>
-                          <input placeholder="Email" type="email" name="email" id="email">
-                          @error('email')
-                              <div class="text-red-500 mt-2">{{ $message }}</div>
-                          @enderror
+                            <input placeholder="Email" type="email" name="email" id="email">
+                            @error('email')
+                                <div class="text-red-500 mt-2">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <button type="submit">Create event</button>
+                        <button type="submit">{{ __('Create event') }}</button>
                     </form>
                 </div>
             </div>
