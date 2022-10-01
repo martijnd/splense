@@ -60,7 +60,7 @@
             "@php artisan key:generate --ansi"
         ],
         "vercel": [
-            "@php artisan migrate"
+            "@php artisan migrate --force"
         ]
     },
     "extra": {
