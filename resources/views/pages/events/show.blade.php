@@ -49,6 +49,13 @@
                             </div>
                         @endif
                     </div>
+
+                    <h2 class="my-2 font-semibold text-xl">Participants</h2>
+                    <ul>
+                        @foreach ($event->users as $user)
+                            <li>{{ $user->name }}</li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>

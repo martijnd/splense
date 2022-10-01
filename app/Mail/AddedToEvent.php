@@ -20,7 +20,7 @@ class AddedToEvent extends Mailable
      */
     public function __construct(
         private User $creator,
-        private Event $event
+        private Event $event,
     ) {
     }
 

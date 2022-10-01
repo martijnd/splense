@@ -7,10 +7,12 @@ use App\Http\Requests\UpdateEventRequest;
 use App\Mail\AddedToEvent;
 use App\Models\Event;
 use App\Models\Expense;
+use App\Models\InvitedUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
+use Ramsey\Uuid\Uuid;
 
 class EventController extends Controller
 {
@@ -37,10 +39,23 @@ class EventController extends Controller
             'user_id' => $request->user()->id
         ]);
 
+
         $event->users()->attach($request->user()->id);
+
+
         collect($request->validated()['emails'])->each(
-            fn ($email) =>
-            Mail::to($email)->send(new AddedToEvent(request()->user(), $event))
+            function ($email) use ($event) {
+                if ($user = User::whereEmail($email)->first()) {
+                    $event->users()->attach($user->id);
+                } else {
+                    InvitedUser::create([
+                        'email' => $email,
+                        'event_id' => $event->id,
+                    ]);
+                }
+
+                Mail::to($email)->send(new AddedToEvent(request()->user(), $event));
+            }
         );
 
         return to_route('events.show', $event->id);
@@ -52,7 +67,7 @@ class EventController extends Controller
      * @param  \App\Models\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $event)
+    public function show(Event $event, Request $request)
     {
         if (request()->user()->cannot('view', $event)) {
             abort(Response::HTTP_UNAUTHORIZED);

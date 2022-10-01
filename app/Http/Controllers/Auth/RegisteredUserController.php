@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
+use App\Models\InvitedUser;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -39,6 +41,8 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -48,6 +52,16 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+
+        $invitedUser = InvitedUser::whereEmail($request->email)->first();
+
+        if ($invitedUser) {
+            $invitedForEvent = Event::find($invitedUser->event_id);
+            $invitedForEvent->users()->attach($user->id);
+            $invitedUser->delete();
+
+            return to_route('events.show', $invitedForEvent->id);
+        }
 
         return redirect(RouteServiceProvider::HOME);
     }
