@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <h1 class="font-bold">{{ __('Create a new event') }}</h1>
-                    <form class="md:w-1/2 gap-4 mt-4 items-center" action="{{ route('events.store') }}" method="POST">
+                    <form class="md:w-2/3 gap-4 mt-4 items-center" action="{{ route('events.store') }}" method="POST">
                         @csrf
                         <div class="grid grid-cols-2">
 
@@ -18,14 +18,14 @@
                                 {{ __('Title') }}
                             </label>
                             <div>
-                                <input type="text" name="title" id="title" placeholder="Title">
+                                <input class="w-full" type="text" name="title" id="title" placeholder="Title">
                                 @error('title')
                                     <div class="text-red-500 mt-2">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
-                        <h2 class="font-semibold">Emails</h2>
-                        <div x-data="handler()">
+                        <h2 class="font-semibold text-lg mt-8">Emails</h2>
+                        <div x-data="handler()" class="space-y-4 mb-4">
                             <template x-for="(email, i) in emails" :key="i">
                                 <div class="grid grid-cols-2 items-center">
                                     <label :for="`email-${i}`" x-text="'Email ' + (i + 1)"></label>
@@ -33,7 +33,10 @@
                                         name="email[]">
                                 </div>
                             </template>
-                            <x-button.secondary @click="addNewEmail()">Add email</x-button.secondary>
+                            <div class="flex justify-end">
+                                <x-button.secondary class="w-1/2" @click="addNewEmail()">&plus; Add email
+                                </x-button.secondary>
+                            </div>
                         </div>
                         <x-button.primary type="submit">{{ __('Create event') }}</x-button.primary>
                     </form>
