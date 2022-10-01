@@ -4,10 +4,17 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Event: {{ $event->title }}
             </h2>
-            <a class="px-4 py-2 border border-gray-300 rounded-lg"
-                href="{{ route('events.expenses.create', $event->id) }}">
-                Add an expense
-            </a>
+            <div class="space-x-2 flex">
+                <x-button.secondary href="{{ route('events.expenses.create', $event->id) }}">
+                    Add an expense
+                </x-button.secondary>
+                <form action="{{ route('events.close', $event) }}" method="POST">
+                    @csrf
+                    <x-button.danger type="submit">
+                        Close event
+                    </x-button.danger>
+                </form>
+            </div>
         </div>
     </x-slot>
     <div class="py-6">

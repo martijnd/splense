@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Mail\AddedToEvent;
+use App\Mail\EventClosed;
 use App\Models\Event;
 use App\Models\Expense;
 use App\Models\InvitedUser;
@@ -181,6 +182,16 @@ class EventController extends Controller
     public function update(UpdateEventRequest $request, Event $event)
     {
         //
+    }
+
+    // TODO: Only creators of the event can close it.
+    public function close(Event $event)
+    {
+        $event->users->each(function ($user) use ($event) {
+            Mail::to($user->email)->send(new EventClosed($event, $user->email));
+        });
+
+        return back();
     }
 
     /**
