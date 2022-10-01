@@ -31,10 +31,5 @@
     "VIEW_COMPILED_PATH": "/tmp/views",
     "SSR_TEMP_PATH": "/tmp/ssr",
     "NODE_PATH": "node"
-  },
-  "scripts": {
-    "vercel": [
-      "@php artisan migrate"
-    ]
   }
 }
