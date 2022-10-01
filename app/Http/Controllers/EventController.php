@@ -12,7 +12,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
-use Ramsey\Uuid\Uuid;
 
 class EventController extends Controller
 {
@@ -61,6 +60,23 @@ class EventController extends Controller
         return to_route('events.show', $event->id);
     }
 
+    public function invite(Event $event, Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+        ]);
+        $email = $request->input('email');
+
+        InvitedUser::create([
+            'email' => $email,
+            'event_id' => $event->id,
+        ]);
+
+        Mail::to($email)->send(new AddedToEvent(request()->user(), $event));
+
+        return to_route('events.show', ['event' => $event]);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -69,11 +85,22 @@ class EventController extends Controller
      */
     public function show(Event $event, Request $request)
     {
+        $invitedUserWithEmail = InvitedUser::where([
+            'email' => $request->user()->email,
+            'event_id' => $event->id
+        ])->first();
+
+        if ($invitedUserWithEmail) {
+            $event->users()->attach($request->user()->id);
+            $invitedUserWithEmail->delete();
+        }
+
         if (request()->user()->cannot('view', $event)) {
             abort(Response::HTTP_UNAUTHORIZED);
         }
 
-        $event->load('creator');
+
+        $event->load('creator', 'users', 'invitedUsers');
 
         return view('pages.events.show', ['event' => $event]);
     }

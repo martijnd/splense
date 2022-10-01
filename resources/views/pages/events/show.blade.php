@@ -55,6 +55,20 @@
                         @foreach ($event->users as $user)
                             <li>{{ $user->name }}</li>
                         @endforeach
+                        @foreach ($event->invitedUsers as $user)
+                            <li>{{ $user->email }} <em>Invited</em></li>
+                        @endforeach
+                        <form class="flex flex-col my-2" action="{{ route('events.invite', $event) }}" method="POST">
+                            @csrf
+                            <div class="flex">
+                                <input class="mr-2" type="email" placeholder="Email" name="email"
+                                    value="{{ old('email') }}">
+                                <x-button.primary type="submit">Invite</x-button.primary>
+                            </div>
+                            @error('email')
+                                <div class="text-red-500 mt-2">{{ $message }}</div>
+                            @enderror
+                        </form>
                     </ul>
                 </div>
             </div>

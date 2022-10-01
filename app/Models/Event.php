@@ -33,4 +33,9 @@ class Event extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    public function invitedUsers()
+    {
+        return $this->hasMany(InvitedUser::class);
+    }
 }
