@@ -10,31 +10,49 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <h1 class="font-bold">{{ __('Create a new event') }}</h1>
-                    <form class="grid grid-cols-2 md:w-1/2 gap-4 mt-4 items-center" action="{{ route('events.store') }}"
-                        method="POST">
+                    <form class="md:w-1/2 gap-4 mt-4 items-center" action="{{ route('events.store') }}" method="POST">
                         @csrf
-                        <label for="title">
-                            {{ __('Title') }}
-                        </label>
-                        <div>
-                            <input type="text" name="title" id="title" placeholder="Title">
-                            @error('title')
-                                <div class="text-red-500 mt-2">{{ $message }}</div>
-                            @enderror
+                        <div class="grid grid-cols-2">
+
+                            <label for="title">
+                                {{ __('Title') }}
+                            </label>
+                            <div>
+                                <input type="text" name="title" id="title" placeholder="Title">
+                                @error('title')
+                                    <div class="text-red-500 mt-2">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
-                        <label for="email">
-                            {{ __('Email') }}
-                        </label>
-                        <div>
-                            <input placeholder="Email" type="email" name="email" id="email">
-                            @error('email')
-                                <div class="text-red-500 mt-2">{{ $message }}</div>
-                            @enderror
+                        <h2 class="font-semibold">Emails</h2>
+                        <div x-data="handler()">
+                            <template x-for="(email, i) in emails" :key="i">
+                                <div class="grid grid-cols-2 items-center">
+                                    <label :for="`email-${i}`" x-text="'Email ' + (i + 1)"></label>
+                                    <input :id="`email-${i}`" placeholder="Email" x-model="emails[i]" type="email"
+                                        name="email[]">
+                                </div>
+                            </template>
+                            <x-button.secondary @click="addNewEmail()">Add email</x-button.secondary>
                         </div>
-                        <button type="submit">{{ __('Create event') }}</button>
+                        <x-button.primary type="submit">{{ __('Create event') }}</x-button.primary>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        function handler() {
+            return {
+                emails: [""],
+                addNewEmail() {
+                    this.emails = [...this.emails, ''];
+                    console.log(this.emails);
+                },
+                removeEmail(index) {
+                    this.emails.splice(index, 1);
+                },
+            };
+        }
+    </script>
 </x-app-layout>

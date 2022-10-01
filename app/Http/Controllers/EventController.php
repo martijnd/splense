@@ -30,8 +30,10 @@ class EventController extends Controller
      * @param  \App\Http\Requests\StoreEventRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreEventRequest $request)
+    public function store(Request $request)
     {
+        dd($request->all());
+
         $event = Event::create([
             'title' => $request->input('title'),
             'user_id' => $request->user()->id
