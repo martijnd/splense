@@ -30,7 +30,7 @@
                                 <div class="grid grid-cols-2 items-center">
                                     <label :for="`email-${i}`" x-text="'Email ' + (i + 1)"></label>
                                     <input :id="`email-${i}`" placeholder="Email" x-model="emails[i]" type="email"
-                                        name="email[]">
+                                        name="emails[]">
                                 </div>
                             </template>
                             <div class="flex justify-end">
@@ -50,7 +50,6 @@
                 emails: [""],
                 addNewEmail() {
                     this.emails = [...this.emails, ''];
-                    console.log(this.emails);
                 },
                 removeEmail(index) {
                     this.emails.splice(index, 1);

@@ -30,18 +30,18 @@ class EventController extends Controller
      * @param  \App\Http\Requests\StoreEventRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreEventRequest $request)
     {
-        dd($request->all());
-
         $event = Event::create([
-            'title' => $request->input('title'),
+            'title' => $request->validated()['title'],
             'user_id' => $request->user()->id
         ]);
 
         $event->users()->attach($request->user()->id);
-
-        Mail::to($request->email)->send(new AddedToEvent(request()->user(), $event));
+        collect($request->validated()['emails'])->each(
+            fn ($email) =>
+            Mail::to($email)->send(new AddedToEvent(request()->user(), $event))
+        );
 
         return to_route('events.show', $event->id);
     }

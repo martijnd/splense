@@ -25,7 +25,8 @@ class StoreEventRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
-            'email' => 'required|email'
+            'emails' => 'nullable|array',
+            'emails.*' => 'email',
         ];
     }
 }

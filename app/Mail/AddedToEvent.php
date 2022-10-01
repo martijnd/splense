@@ -34,6 +34,6 @@ class AddedToEvent extends Mailable
         return $this->markdown('emails.events.added', [
             'creator' => $this->creator,
             'url' => route('events.show', $this->event->id)
-        ])->subject('You have been added to an event - '. config('app.name'));
+        ])->subject($this->creator->name . ' has added you to ' . $this->event->title . ' - ' . config('app.name'));
     }
 }
