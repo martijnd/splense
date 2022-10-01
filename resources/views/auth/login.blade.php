@@ -55,7 +55,7 @@
             </div>
         </form>
         <div class="bg-blue-400 rounded px-4 py-2 text-white my-4">
-            <a class="underline" href="{{ route('register') }}">No account yet?</a> {{ config('app.url') }}
+            <a class="underline" href="{{ route('register') }}">No account yet?</a>
         </div>
     </x-auth-card>
 </x-guest-layout>
