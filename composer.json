@@ -45,6 +45,9 @@
         "lint": "./vendor/bin/pint --test",
         "lint:fix": "./vendor/bin/pint",
         "test": "./vendor/bin/pest",
+        "setup": [
+            "@php artisan migrate"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
