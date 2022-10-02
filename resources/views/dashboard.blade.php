@@ -20,6 +20,8 @@
                             </h2>
                             <h3 class="italic">{{ $event->users()->count() }}
                                 {{ $event->users()->count() === 1 ? 'participant' : 'participants' }}</h3>
+                            <h3 class="italic">{{ $event->expenses()->count() }}
+                                {{ $event->expenses()->count() === 1 ? 'expense' : 'expenses' }}</h3>
                             @if ($event->closed_at)
                                 <div>
                                     <x-badge.danger>Closed</x-badge.danger>
