@@ -8,6 +8,8 @@
         <div class="bg-white shadow-md px-6 py-4 sm:rounded-lg">
             {{ $slot }}
         </div>
-        {{ $footer }}
+        @isset($footer)
+            {{ $footer }}
+        @endisset
     </div>
 </div>
