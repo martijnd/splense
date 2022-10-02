@@ -85,8 +85,8 @@
                         <form class="flex flex-col my-2" action="{{ route('events.invite', $event) }}" method="POST">
                             @csrf
                             <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
-                                <input class="w-full" type="email" placeholder="Email" name="email"
-                                    value="{{ old('email') }}">
+                                <x-text-input class="w-full" type="email" placeholder="Email" name="email"
+                                    value="{{ old('email') }}" />
                                 <x-button.primary type="submit">Invite</x-button.primary>
                             </div>
                             @error('email')

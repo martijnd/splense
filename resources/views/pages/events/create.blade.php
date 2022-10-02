@@ -17,7 +17,8 @@
                                 {{ __('Title') }}
                             </label>
                             <div>
-                                <input class="w-full" type="text" name="title" id="title" placeholder="Title">
+                                <x-text-input class="w-full" type="text" name="title" id="title"
+                                    placeholder="Title" />
                                 @error('title')
                                     <div class="text-red-500 mt-2">{{ $message }}</div>
                                 @enderror
@@ -27,7 +28,8 @@
                         <div class="grid grid-cols-2 mt-8" x-data="imageHandler()">
                             <label for="image">Image</label>
                             <div class="flex space-x-2">
-                                <input type="text" name="image" id="image" placeholder="Search images...">
+                                <x-text-input type="text" name="image" id="image"
+                                    placeholder="Search images..." />
                                 <x-button.secondary class="flex-grow" @click="searchImage()">Search</x-button.secondary>
                             </div>
                             <div class="grid grid-cols-3 col-span-2 mt-4 gap-2">
@@ -45,8 +47,8 @@
                             <template x-for="(email, i) in emails" :key="i">
                                 <div class="grid grid-cols-2 items-center">
                                     <label :for="`email-${i}`" x-text="'Email ' + (i + 1)"></label>
-                                    <input :id="`email-${i}`" placeholder="Email" x-model="emails[i]" type="email"
-                                        name="emails[]">
+                                    <x-text-input ::id="`email-${i}`" placeholder="Email" x-model="emails[i]"
+                                        type="email" name="emails[]" />
                                 </div>
                             </template>
                             <div class="flex justify-end">

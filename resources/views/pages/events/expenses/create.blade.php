@@ -17,7 +17,7 @@
                             Title
                         </label>
                         <div>
-                            <input type="text" name="title" id="title" placeholder="Title">
+                            <x-text-input type="text" name="title" id="title" placeholder="Title" />
                             @error('title')
                                 <div class="text-red-500 mt-2">{{ $message }}</div>
                             @enderror
@@ -26,7 +26,7 @@
                             Amount
                         </label>
                         <div>
-                            <input placeholder="Amount" type="text" name="amount" id="amount">
+                            <x-text-input placeholder="Amount" type="text" name="amount" id="amount" />
                             @error('amount')
                                 <div class="text-red-500 mt-2">{{ $message }}</div>
                             @enderror
@@ -38,8 +38,8 @@
                             @foreach ($event->users as $user)
                                 <div class="flex space-x-2 items-center">
                                     <label for="{{ $user->id }}">
-                                        <input type="checkbox" name="users[{{ $user->id }}]"
-                                            id="{{ $user->id }}">
+                                        <x-text-input type="checkbox" name="users[{{ $user->id }}]"
+                                            id="{{ $user->id }}" />
                                         <span>{{ $user->name }}</span>
                                     </label>
                                 </div>
