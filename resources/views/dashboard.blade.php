@@ -16,7 +16,11 @@
                 <a href="{{ route('events.show', $event->id) }}">
                     <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div class="p-4 bg-white">
-                            <h2 class="font-semibold">{{ $event->title }}</h2>
+                            <h2 class="font-semibold">{{ $event->title }}
+                                @if ($event->closed_at)
+                                    <x-badge.danger>Closed</x-badge.danger>
+                                @endif
+                            </h2>
                             <h3 class="italic">{{ $event->users()->count() }}
                                 {{ $event->users()->count() === 1 ? 'participant' : 'participants' }}</h3>
                         </div>

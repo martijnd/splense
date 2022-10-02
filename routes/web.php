@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/events/{event}/result', [EventController::class, 'result'])->name('events.show.result');
     Route::post('/events/{event}/invite', [EventController::class, 'invite'])->name('events.invite');
     Route::post('/events/{event}/close', [EventController::class, 'close'])->name('events.close');
+    Route::post('/events/{event}/open', [EventController::class, 'open'])->name('events.open');
     Route::get('/events/{event}/expenses/create', [ExpenseController::class, 'create'])->name('events.expenses.create');
     Route::post('/events/{event}/expenses', [ExpenseController::class, 'store'])->name('events.expenses.store');
 });

@@ -187,9 +187,19 @@ class EventController extends Controller
     // TODO: Only creators of the event can close it.
     public function close(Event $event)
     {
+        $event->update(['closed_at' => now()]);
+
         $event->users->each(function ($user) use ($event) {
             Mail::to($user->email)->send(new EventClosed($event, $user->email));
         });
+
+        return back();
+    }
+
+    // TODO: Only creators of the event can open it.
+    public function open(Event $event)
+    {
+        $event->update(['closed_at' => null]);
 
         return back();
     }
