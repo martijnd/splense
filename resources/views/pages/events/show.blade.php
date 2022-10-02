@@ -37,7 +37,8 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="flex justify-between items-center">
                         <h2 class="mb-2 font-semibold text-xl">Expenses</h2>
-                        <a href="{{ route('events.show.result', $event->id) }}">Results</a>
+                        <x-button.secondary href="{{ route('events.show.result', $event->id) }}">Results
+                        </x-button.secondary>
                     </div>
                     <div>
 
@@ -68,31 +69,30 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg col-span-12 xl:col-span-4">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <h2 class="my-2 font-semibold text-xl">Participants</h2>
-                    <ul>
+            <div class="col-span-12 xl:col-span-4">
+                <div class="p-6 bg-white border-gray-200 rounded-lg overflow-hidden">
+                    <h2 class="my-2 font-semibold text-xl">People</h2>
+                    <ul class="space-y-1">
                         @foreach ($event->users as $user)
                             <li>{{ $user->name }}</li>
                         @endforeach
                         @foreach ($event->invitedUsers as $user)
                             <li>{{ $user->email }} <em>Invited</em></li>
                         @endforeach
-                        @if (!$event->closed_at && $event->user_id === auth()->id())
-                            <form class="flex flex-col my-2" action="{{ route('events.invite', $event) }}"
-                                method="POST">
-                                @csrf
-                                <div class="flex">
-                                    <input class="mr-2" type="email" placeholder="Email" name="email"
-                                        value="{{ old('email') }}">
-                                    <x-button.primary type="submit">Invite</x-button.primary>
-                                </div>
-                                @error('email')
-                                    <div class="text-red-500 mt-2">{{ $message }}</div>
-                                @enderror
-                            </form>
-                        @endif
                     </ul>
+                    @if (!$event->closed_at && $event->user_id === auth()->id())
+                        <form class="flex flex-col my-2" action="{{ route('events.invite', $event) }}" method="POST">
+                            @csrf
+                            <div class="flex">
+                                <input class="mr-2" type="email" placeholder="Email" name="email"
+                                    value="{{ old('email') }}">
+                                <x-button.primary type="submit">Invite</x-button.primary>
+                            </div>
+                            @error('email')
+                                <div class="text-red-500 mt-2">{{ $message }}</div>
+                            @enderror
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>
