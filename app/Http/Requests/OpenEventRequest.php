@@ -15,4 +15,16 @@ class OpenEventRequest extends FormRequest
     {
         return $this->event->user_id === auth()->id();
     }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, mixed>
+     */
+    public function rules()
+    {
+        return [
+            //
+        ];
+    }
 }

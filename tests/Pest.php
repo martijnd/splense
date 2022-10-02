@@ -45,9 +45,12 @@ expect()->extend('toBeOne', function () {
 /**
  * Set the currently logged in user for the application.
  *
- * @return TestCase
+ * @return User
  */
 function actingAs(User $user = null, string $driver = null)
 {
-    return test()->actingAs($user ?? User::factory()->create(), $driver);
+    $user ??= User::factory()->create();
+    test()->actingAs($user, $driver);
+
+    return $user;
 }

@@ -146,14 +146,14 @@ class EventController extends Controller
             Mail::to($user->email)->send(new EventClosed($event, $user->email));
         });
 
-        return back();
+        return to_route('events.show', $event->id);
     }
 
     public function open(Event $event, OpenEventRequest $request)
     {
         $event->update(['closed_at' => null]);
 
-        return back();
+        return to_route('events.show', $event->id);
     }
 
     /**
