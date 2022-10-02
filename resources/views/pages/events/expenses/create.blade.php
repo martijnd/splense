@@ -48,7 +48,9 @@
                                 <div class="text-red-500 mt-2">{{ $message }}</div>
                             @enderror
                         </div>
-                        <button type="submit" class="border rounded-lg px-4 py-2">Create event</button>
+                        <x-button.primary type="submit" class="col-start-2">
+                            {{ __('Create event') }}
+                        </x-button.primary>
                     </form>
                 </div>
             </div>
