@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center px-4">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight flex items-center">
                 Event: {{ $event->title }}
                 @if ($event->closed_at)
@@ -33,7 +33,7 @@
     </x-slot>
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 gap-4 grid grid-cols-1 md:grid-cols-12">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg col-span-12 xl:col-span-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg col-span-12 lg:col-span-8">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="flex justify-between items-center">
                         <h2 class="mb-2 font-semibold text-xl">Expenses</h2>
@@ -48,18 +48,19 @@
                             <div class="divide-y">
                                 <div class="grid grid-cols-12 my-2">
                                     <div class="col-span-2 font-semibold">Payer</div>
-                                    <div class="col-span-2 font-semibold">Title</div>
-                                    <div class="col-span-2 font-semibold">Amount</div>
-                                    <div class="col-span-2 font-semibold">Date</div>
+                                    <div class="col-span-3 md:col-span-2 font-semibold">Title</div>
+                                    <div class="col-span-3 md:col-span-2 font-semibold">Amount</div>
+                                    <div class="hidden md:block md:col-span-2 font-semibold">Date</div>
                                     <div class="col-span-4 font-semibold">Participants</div>
                                 </div>
                                 @foreach ($event->expenses as $expense)
                                     <div class="grid grid-cols-12 py-8 text-sm">
                                         <div class="col-span-2">{{ $expense->payer->name }}</div>
-                                        <div class="col-span-2">{{ $expense->title }}</div>
-                                        <div class="col-span-2">€
+                                        <div class="col-span-3 md:col-span-2">{{ $expense->title }}</div>
+                                        <div class="col-span-3 md:col-span-2">€
                                             {{ number_format($expense->amount / 100, 2, ',', '.') }}</div>
-                                        <div class="col-span-2">{{ $expense->created_at->format('d-m-y') }}</div>
+                                        <div class="hidden md:block col-span-0 md:col-span-2">
+                                            {{ $expense->created_at->format('d-m-y') }}</div>
                                         <div class="col-span-4">{{ $expense->users->map->name->join(', ') }}
                                         </div>
                                     </div>
@@ -69,7 +70,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-span-12 xl:col-span-4">
+            <div class="col-span-12 lg:col-span-4">
                 <div class="p-6 bg-white border-gray-200 rounded-lg overflow-hidden">
                     <h2 class="my-2 font-semibold text-xl">People</h2>
                     <ul class="space-y-1">
@@ -83,8 +84,8 @@
                     @if (!$event->closed_at && $event->user_id === auth()->id())
                         <form class="flex flex-col my-2" action="{{ route('events.invite', $event) }}" method="POST">
                             @csrf
-                            <div class="flex">
-                                <input class="mr-2" type="email" placeholder="Email" name="email"
+                            <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+                                <input class="w-full" type="email" placeholder="Email" name="email"
                                     value="{{ old('email') }}">
                                 <x-button.primary type="submit">Invite</x-button.primary>
                             </div>
