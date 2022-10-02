@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CloseEventRequest;
+use App\Http\Requests\OpenEventRequest;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Mail\AddedToEvent;
@@ -184,8 +186,7 @@ class EventController extends Controller
         //
     }
 
-    // TODO: Only creators of the event can close it.
-    public function close(Event $event)
+    public function close(Event $event, CloseEventRequest $request)
     {
         $event->update(['closed_at' => now()]);
 
@@ -196,8 +197,7 @@ class EventController extends Controller
         return back();
     }
 
-    // TODO: Only creators of the event can open it.
-    public function open(Event $event)
+    public function open(Event $event, OpenEventRequest $request)
     {
         $event->update(['closed_at' => null]);
 

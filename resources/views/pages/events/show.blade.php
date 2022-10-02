@@ -10,14 +10,7 @@
                 @endif
             </h2>
             <div class="space-x-2 flex">
-                @if ($event->closed_at)
-                    <form action="{{ route('events.open', $event) }}" method="POST">
-                        @csrf
-                        <x-button.danger type="submit">
-                            Re-open event
-                        </x-button.danger>
-                    </form>
-                @else
+                @if (!$event->closed_at && $event->user_id === auth()->id())
                     <x-button.secondary href="{{ route('events.expenses.create', $event->id) }}">
                         Add an expense
                     </x-button.secondary>
@@ -25,6 +18,13 @@
                         @csrf
                         <x-button.danger type="submit">
                             Close event
+                        </x-button.danger>
+                    </form>
+                @else
+                    <form action="{{ route('events.open', $event) }}" method="POST">
+                        @csrf
+                        <x-button.danger type="submit">
+                            Re-open event
                         </x-button.danger>
                     </form>
                 @endif
@@ -78,7 +78,7 @@
                         @foreach ($event->invitedUsers as $user)
                             <li>{{ $user->email }} <em>Invited</em></li>
                         @endforeach
-                        @if (!$event->closed_at)
+                        @if (!$event->closed_at && $event->user_id === auth()->id())
                             <form class="flex flex-col my-2" action="{{ route('events.invite', $event) }}"
                                 method="POST">
                                 @csrf
