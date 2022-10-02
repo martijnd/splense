@@ -12,6 +12,7 @@ class Event extends Model
     protected $fillable = [
         'title',
         'user_id',
+        'image_url',
         'closed_at'
     ];
 
@@ -37,5 +38,10 @@ class Event extends Model
     public function invitedUsers()
     {
         return $this->hasMany(InvitedUser::class);
+    }
+
+    public function total()
+    {
+        return $this->expenses->reduce(fn ($total, $expense) => $total + $expense->amount, 0);
     }
 }

@@ -17,6 +17,7 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('image_url');
             $table->foreignIdFor(User::class)->constrained();
             $table->timestamp('closed_at')->nullable();
             $table->timestamps();

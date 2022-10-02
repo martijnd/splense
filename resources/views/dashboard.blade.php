@@ -14,18 +14,26 @@
         <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
             @foreach ($events as $event)
                 <a href="{{ route('events.show', $event->id) }}">
-                    <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg hover:shadow-xl transition-shadow">
-                        <div class="p-4 space-y-2 bg-white">
-                            <h2 class="font-semibold">{{ $event->title }}
-                            </h2>
-                            <h3 class="italic">
+                    <div class="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-xl transition-shadow">
+                        <div class="inline max-h-64">
+                            <img class="rounded-t-lg" src="{{ $event->image_url }}" />
+                        </div>
+                        <div class="p-5">
+                            <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900">
+                                {{ $event->title }}</h5>
+                            <p class="mb-2 font-normal text-gray-700 ">
                                 <span class="font-semibold">{{ $event->users()->count() }}</span>
                                 {{ $event->users()->count() === 1 ? 'participant' : 'participants' }}
-                            </h3>
-                            <h3 class="italic">
+                            </p>
+                            <p class="mb-2 font-normal text-gray-700">
                                 <span class="font-semibold">{{ $event->expenses()->count() }}</span>
                                 {{ $event->expenses()->count() === 1 ? 'expense' : 'expenses' }}
-                            </h3>
+                            </p>
+                            <p class="mb-2 font-normal text-gray-700">
+                                € <span
+                                    class="font-semibold">{{ number_format($event->total() / 100, 2, ',', '.') }}</span>
+                                total
+                            </p>
                             @if ($event->closed_at)
                                 <div>
                                     <x-badge.danger>Closed</x-badge.danger>

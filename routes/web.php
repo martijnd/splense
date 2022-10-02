@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
     Route::get('/', DashboardController::class)->name('dashboard');
     Route::resource('events', EventController::class)->except('index');
+    Route::get('/search-image', [EventController::class, 'searchImage'])->name('events.search-image');
     Route::get('/events/{event}/result', [EventController::class, 'result'])->name('events.show.result');
     Route::post('/events/{event}/invite', [EventController::class, 'invite'])->name('events.invite');
     Route::post('/events/{event}/close', [EventController::class, 'close'])->name('events.close');

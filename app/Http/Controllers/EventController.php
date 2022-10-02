@@ -12,6 +12,7 @@ use App\Models\Event;
 use App\Models\InvitedUser;
 use App\Models\User;
 use App\Services\ExpenseCalculator;
+use App\Services\Pexels\PexelsApi;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
@@ -28,6 +29,15 @@ class EventController extends Controller
         return view('pages.events.create');
     }
 
+    public function searchImage(Request $request)
+    {
+        $api = new PexelsApi();
+
+        $result = $api->search($request->query('query'));
+
+        return $result;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -38,7 +48,8 @@ class EventController extends Controller
     {
         $event = Event::create([
             'title' => $request->validated()['title'],
-            'user_id' => $request->user()->id
+            'user_id' => $request->user()->id,
+            'image_url' => $request->validated()['image_url'],
         ]);
 
         $event->users()->attach($request->user()->id);
