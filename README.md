@@ -1,13 +1,23 @@
 Event
 
--   users
+-   title
+-   user_id
+-   closed_at
+
 -   expenses
+-   creator
+-   users
+-   invitedUsers
 
 User
 
--   expenses -> DebtorExpense -> Expense[]
+-   name
+-   email
 
-DebtorExpense
+-   events
+-   (expenses -> ExpenseUser -> Expense[])
+
+ExpenseUser
 
 -   user_id
 -   expense_id
@@ -21,6 +31,6 @@ Expense
 -   name
 -   amount
 
--   creditor -> User
--   debtors -> DebtorExpense -> User[]
+-   payer -> User
+-   users -> ExpenseUser -> User[]
 -   event

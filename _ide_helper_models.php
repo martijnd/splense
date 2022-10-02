@@ -9,26 +9,6 @@
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  */
 
-
-namespace App\Models {
-	/**
-	 * App\Models\DebtorExpense
-	 *
-	 * @property int $id
-	 * @property \Illuminate\Support\Carbon|null $created_at
-	 * @property \Illuminate\Support\Carbon|null $updated_at
-	 * @method static \Illuminate\Database\Eloquent\Builder|DebtorExpense newModelQuery()
-	 * @method static \Illuminate\Database\Eloquent\Builder|DebtorExpense newQuery()
-	 * @method static \Illuminate\Database\Eloquent\Builder|DebtorExpense query()
-	 * @method static \Illuminate\Database\Eloquent\Builder|DebtorExpense whereCreatedAt($value)
-	 * @method static \Illuminate\Database\Eloquent\Builder|DebtorExpense whereId($value)
-	 * @method static \Illuminate\Database\Eloquent\Builder|DebtorExpense whereUpdatedAt($value)
-	 */
-	class DebtorExpense extends \Eloquent
-	{
-	}
-}
-
 namespace App\Models {
 	/**
 	 * App\Models\Event
