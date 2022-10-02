@@ -23,7 +23,7 @@
                 @else
                     <form action="{{ route('events.open', $event) }}" method="POST">
                         @csrf
-                        <x-button.danger type="submit">
+                        <x-button.danger type="submit" outlined>
                             Re-open event
                         </x-button.danger>
                     </form>
