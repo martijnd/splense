@@ -20,7 +20,7 @@ class EventFactory extends Factory
         return [
             'title' => $this->faker->sentence(),
             'user_id' => User::factory(),
-            'ended_at' => null,
+            'closed_at' => null,
         ];
     }
 }

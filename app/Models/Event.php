@@ -12,11 +12,11 @@ class Event extends Model
     protected $fillable = [
         'title',
         'user_id',
-        'ended_at'
+        'closed_at'
     ];
 
     protected $casts = [
-        'ended_at' => 'datetime',
+        'closed_at' => 'datetime',
     ];
 
     public function expenses()
