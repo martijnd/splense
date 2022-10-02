@@ -54,8 +54,10 @@
                 </x-primary-button>
             </div>
         </form>
-        <div class="bg-blue-400 rounded px-4 py-2 text-white my-4">
-            <a class="underline" href="{{ route('register') }}">No account yet?</a>
-        </div>
+        <x-slot name="footer">
+            <div class="text-sm text-right p-3">
+                <a class="underline" href="{{ route('register') }}">No account yet?</a>
+            </div>
+        </x-slot>
     </x-auth-card>
 </x-guest-layout>

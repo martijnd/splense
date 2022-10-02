@@ -13,15 +13,15 @@
     <div class="max-w-7xl py-6 mx-auto px-4">
         <div class="grid grid-cols-3 gap-6">
             @foreach ($events as $event)
-                <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                    <div class="p-4 bg-white">
-                        <a href="{{ route('events.show', $event->id) }}">
+                <a href="{{ route('events.show', $event->id) }}">
+                    <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                        <div class="p-4 bg-white">
                             <h2 class="font-semibold">{{ $event->title }}</h2>
                             <h3 class="italic">{{ $event->users()->count() }}
                                 {{ $event->users()->count() === 1 ? 'participant' : 'participants' }}</h3>
-                        </a>
+                        </div>
                     </div>
-                </div>
+                </a>
             @endforeach
         </div>
     </div>
