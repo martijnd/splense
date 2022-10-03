@@ -2,6 +2,7 @@
 
 namespace App\Services\Pexels;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
 class PexelsApi
@@ -23,6 +24,10 @@ class PexelsApi
    */
   public function search(string $searchQuery)
   {
+    if (Cache::has($searchQuery)) {
+      return Cache::get($searchQuery);
+    }
+
     $array = $this->httpClient->get(
       'search',
       array_merge(
@@ -32,6 +37,8 @@ class PexelsApi
         ]
       )
     )->json();
+
+    Cache::rememberForever($searchQuery, fn () => $array);
 
     return $array;
   }
