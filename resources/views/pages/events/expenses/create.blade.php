@@ -10,7 +10,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg dark:text-white">
                 <div class="p-6">
                     <h1 class="font-bold">Add a new expense for event '{{ $event->title }}'</h1>
-                    <form class="grid grid-cols-2 md:w-1/2 gap-4 mt-4 items-center"
+                    <form x-data="handler()" class="grid grid-cols-2 md:w-1/2 gap-4 mt-4 items-center"
                         action="{{ route('events.expenses.store', $event) }}" method="POST">
                         @csrf
                         <label for="title">
@@ -31,14 +31,14 @@
                                 <div class="text-red-500 mt-2">{{ $message }}</div>
                             @enderror
                         </div>
-                        <label for="users">
+                        <label for="users" class="self-start">
                             Participants
                         </label>
                         <div>
                             @foreach ($event->users as $user)
                                 <div class="flex space-x-2 items-center">
                                     <label for="{{ $user->id }}">
-                                        <input class="rounded dark:bg-gray-900" type="checkbox"
+                                        <input class="rounded dark:bg-gray-900" type="checkbox" data-participant-input
                                             name="users[{{ $user->id }}]" id="{{ $user->id }}" />
                                         <span>{{ $user->name }}</span>
                                     </label>
@@ -47,6 +47,7 @@
                             @error('users')
                                 <div class="text-red-500 mt-2">{{ $message }}</div>
                             @enderror
+                            <x-button.secondary class="mt-2" @click="selectAll()">Toggle all</x-button.secondary>
                         </div>
                         <x-button.primary type="submit" class="col-start-2">
                             {{ __('Create event') }}
@@ -56,4 +57,17 @@
             </div>
         </div>
     </div>
+    <script>
+        function handler() {
+            return {
+                selectAll() {
+                    const inputs = Array.from(document.querySelectorAll('[data-participant-input]'));
+                    const value = inputs.some(input => input.checked === false);
+                    inputs.forEach(input => {
+                        input.checked = value;
+                    })
+                }
+            }
+        }
+    </script>
 </x-app-layout>
