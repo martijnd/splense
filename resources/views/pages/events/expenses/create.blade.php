@@ -17,7 +17,8 @@
                             Title
                         </label>
                         <div>
-                            <x-text-input type="text" name="title" id="title" placeholder="Title" />
+                            <x-text-input type="text" name="title" id="title" placeholder="Title"
+                                value="{{ old('title') }}" />
                             @error('title')
                                 <div class="text-red-500 mt-2">{{ $message }}</div>
                             @enderror
@@ -26,7 +27,8 @@
                             Amount
                         </label>
                         <div>
-                            <x-text-input placeholder="Amount" type="text" name="amount" id="amount" />
+                            <x-text-input placeholder="Amount" type="text" name="amount" id="amount"
+                                value="{{ old('amount') }}" />
                             @error('amount')
                                 <div class="text-red-500 mt-2">{{ $message }}</div>
                             @enderror
@@ -50,7 +52,7 @@
                             @enderror
                         </div>
                         <x-button.primary type="submit" class="col-start-2">
-                            {{ __('Create event') }}
+                            {{ __('Create expense') }}
                         </x-button.primary>
                     </form>
                 </div>

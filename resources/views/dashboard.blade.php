@@ -15,7 +15,7 @@
             @foreach ($events as $event)
                 <a href="{{ route('events.show', $event->id) }}">
                     <div
-                        class="transition-all bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-900 hover:shadow-xl">
+                        class="transition-all bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:hover:bg-gray-900 dark:border-gray-700 hover:shadow-xl">
                         <div class="inline max-h-64">
                             <img class="rounded-t-lg" src="{{ $event->image_url }}" />
                         </div>
@@ -44,7 +44,7 @@
                     </div>
                 </a>
             @endforeach
-            <a class="grid font-bold text-gray-500 transition-colors border-8 border-white border-dashed dark:text-white dark:border-gray-900 rounded-xl place-items-center hover:bg-gray-200 hover:dark:bg-gray-800"
+            <a class="h-[370px] grid font-bold text-gray-500 transition-colors border-2 hover:border-8 border-white border-dashed dark:text-white dark:border-gray-900 rounded-xl place-items-center hover:bg-gray-200 hover:dark:bg-gray-800"
                 href="{{ route('events.create') }}">
                 Create new event
             </a>
