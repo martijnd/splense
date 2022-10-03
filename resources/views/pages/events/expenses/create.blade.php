@@ -35,6 +35,7 @@
                             Participants
                         </label>
                         <div>
+                            <x-button.secondary class="mb-2" @click="selectAll()">Toggle all</x-button.secondary>
                             @foreach ($event->users as $user)
                                 <div class="flex space-x-2 items-center">
                                     <label for="{{ $user->id }}">
@@ -47,7 +48,6 @@
                             @error('users')
                                 <div class="text-red-500 mt-2">{{ $message }}</div>
                             @enderror
-                            <x-button.secondary class="mt-2" @click="selectAll()">Toggle all</x-button.secondary>
                         </div>
                         <x-button.primary type="submit" class="col-start-2">
                             {{ __('Create event') }}
