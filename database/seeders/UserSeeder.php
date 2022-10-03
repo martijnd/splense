@@ -24,6 +24,10 @@ class UserSeeder extends Seeder
             'email' => 'martijn.dorsman@gmail.com',
             'name' => 'Martijn Dorsman'
         ]);
+        $user2 = User::factory()->create([
+            'email' => 'floor.guit@gmail.com',
+            'name' => 'Floor Guit'
+        ]);
         $event = Event::factory()
             ->create(['user_id' => $user->id]);
 
@@ -31,11 +35,12 @@ class UserSeeder extends Seeder
             return;
         }
 
-        // Create 5 users
-        $users = collect([$user, ...User::factory(9)->create()]);
+        // Create users
+        $users = collect([$user, $user2, ...User::factory(9)->create()]);
 
         // Create an event and attach 5 users to it
         $event->users()->attach($users->pluck('id'));
+
         $expenses = Expense::factory(5)
             ->sequence(fn ($sequence) => ['user_id' => $users[$sequence->index]->id])
             ->create(['event_id' => $event->id]);
