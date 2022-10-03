@@ -1,14 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-white leading-tight">
             {{ __('Add a new expense') }}
         </h2>
     </x-slot>
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg dark:text-white">
+                <div class="p-6">
                     <h1 class="font-bold">Add a new expense for event '{{ $event->title }}'</h1>
                     <form class="grid grid-cols-2 md:w-1/2 gap-4 mt-4 items-center"
                         action="{{ route('events.expenses.store', $event) }}" method="POST">
@@ -38,8 +38,8 @@
                             @foreach ($event->users as $user)
                                 <div class="flex space-x-2 items-center">
                                     <label for="{{ $user->id }}">
-                                        <x-text-input type="checkbox" name="users[{{ $user->id }}]"
-                                            id="{{ $user->id }}" />
+                                        <input class="rounded dark:bg-gray-900" type="checkbox"
+                                            name="users[{{ $user->id }}]" id="{{ $user->id }}" />
                                         <span>{{ $user->name }}</span>
                                     </label>
                                 </div>

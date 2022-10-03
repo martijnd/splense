@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex flex-col md:flex-row justify-between items-center px-4">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight flex items-center">
+        <div class="flex flex-col items-center justify-between px-4 md:flex-row">
+            <h2 class="flex items-center text-xl font-semibold leading-tight text-gray-800 dark:text-white">
                 Event: {{ $event->title }}
                 @if ($event->closed_at)
                     <x-badge.danger class="ml-2">
@@ -9,7 +9,7 @@
                     </x-badge.danger>
                 @endif
             </h2>
-            <div class="space-x-2 flex">
+            <div class="flex space-x-2">
                 @if (!$event->closed_at && $event->user_id === auth()->id())
                     <x-button.secondary href="{{ route('events.expenses.create', $event->id) }}">
                         Add an expense
@@ -32,11 +32,12 @@
         </div>
     </x-slot>
     <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 gap-4 grid grid-cols-1 md:grid-cols-12">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg col-span-12 lg:col-span-8">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <div class="flex justify-between items-center">
-                        <h2 class="mb-2 font-semibold text-xl">Expenses</h2>
+        <div class="grid grid-cols-1 gap-4 mx-auto max-w-7xl sm:px-6 lg:px-8 md:grid-cols-12">
+            <div
+                class="col-span-12 overflow-hidden bg-white shadow-sm dark:text-white dark:bg-gray-800 sm:rounded-lg lg:col-span-8">
+                <div class="p-6">
+                    <div class="flex items-center justify-between">
+                        <h2 class="mb-2 text-xl font-semibold">Expenses</h2>
                         <x-button.secondary href="{{ route('events.show.result', $event->id) }}">Results
                         </x-button.secondary>
                     </div>
@@ -48,9 +49,9 @@
                             <div class="divide-y">
                                 <div class="grid grid-cols-12 my-2">
                                     <div class="col-span-2 font-semibold">Payer</div>
-                                    <div class="col-span-3 md:col-span-2 font-semibold">Title</div>
-                                    <div class="col-span-3 md:col-span-2 font-semibold">Amount</div>
-                                    <div class="hidden md:block md:col-span-2 font-semibold">Date</div>
+                                    <div class="col-span-3 font-semibold md:col-span-2">Title</div>
+                                    <div class="col-span-3 font-semibold md:col-span-2">Amount</div>
+                                    <div class="hidden font-semibold md:block md:col-span-2">Date</div>
                                     <div class="col-span-4 font-semibold">Participants</div>
                                 </div>
                                 @foreach ($event->expenses as $expense)
@@ -71,8 +72,8 @@
                 </div>
             </div>
             <div class="col-span-12 lg:col-span-4">
-                <div class="p-6 bg-white border-gray-200 rounded-lg overflow-hidden">
-                    <h2 class="my-2 font-semibold text-xl">People</h2>
+                <div class="p-6 overflow-hidden bg-white dark:bg-gray-800 dark:text-white border-gray-200 rounded-lg">
+                    <h2 class="my-2 text-xl font-semibold">People</h2>
                     <ul class="space-y-1">
                         @foreach ($event->users as $user)
                             <li>{{ $user->name }}</li>
@@ -84,13 +85,13 @@
                     @if (!$event->closed_at && $event->user_id === auth()->id())
                         <form class="flex flex-col my-2" action="{{ route('events.invite', $event) }}" method="POST">
                             @csrf
-                            <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+                            <div class="flex flex-col space-y-2 sm:flex-row sm:space-y-0 sm:space-x-2">
                                 <x-text-input class="w-full" type="email" placeholder="Email" name="email"
                                     value="{{ old('email') }}" />
                                 <x-button.primary type="submit">Invite</x-button.primary>
                             </div>
                             @error('email')
-                                <div class="text-red-500 mt-2">{{ $message }}</div>
+                                <div class="mt-2 text-red-500">{{ $message }}</div>
                             @enderror
                         </form>
                     @endif

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center px-4">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <div class="flex justify-between items-center px-4 text-gray-800 dark:text-white">
+            <h2 class="font-semibold text-xl leading-tight">
                 Result for {{ $event->title }}
             </h2>
             <div>
@@ -12,8 +12,8 @@
     </x-slot>
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
+            <div class="bg-white dark:bg-gray-800 dark:text-gray-200 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6">
                     @if ($event->closed_at)
                         <h2>Closed at {{ $event->closed_at?->format('d-m-Y') }}</h2>
                     @endif
@@ -23,7 +23,7 @@
                         @if ($event->expenses->count() === 0)
                             <em>No expenses.</em>
                         @else
-                            <div class="divide-y">
+                            <div class="divide-y dark:divide-gray-600">
                                 @foreach ($users as $user)
                                     <div class="grid grid-cols-12 py-8 text-sm">
                                         <div class="col-span-5">

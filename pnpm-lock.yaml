@@ -3,12 +3,12 @@ lockfileVersion: 5.4
 specifiers:
   '@tailwindcss/forms': ^0.5.2
   alpinejs: ^3.4.2
-  autoprefixer: ^10.4.2
+  autoprefixer: ^10.4.11
   axios: ^0.27
+  flowbite: ^1.5.3
   laravel-vite-plugin: ^0.6.0
-  lodash: ^4.17.19
-  postcss: ^8.4.6
-  tailwindcss: ^3.1.0
+  postcss: ^8.4.16
+  tailwindcss: ^3.1.8
   vite: ^3.0.0
 
 devDependencies:
@@ -16,8 +16,8 @@ devDependencies:
   alpinejs: 3.10.3
   autoprefixer: 10.4.11_postcss@8.4.16
   axios: 0.27.2
+  flowbite: 1.5.3
   laravel-vite-plugin: 0.6.0_vite@3.1.0
-  lodash: 4.17.21
   postcss: 8.4.16
   tailwindcss: 3.1.8
   vite: 3.1.0
@@ -52,6 +52,10 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
+    dev: true
+
+  /@popperjs/core/2.11.6:
+    resolution: {integrity: sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==}
     dev: true
 
   /@tailwindcss/forms/0.5.3_tailwindcss@3.1.8:
@@ -472,6 +476,13 @@ packages:
       to-regex-range: 5.0.1
     dev: true
 
+  /flowbite/1.5.3:
+    resolution: {integrity: sha512-e2OHfndxTHtGMqcPqvqwg3gGLg57hmIDVgE/BazMDccgirQ0JEtirKnbZZ4WSOIEhNDgO9pJZuyC8rRlcMm6pQ==}
+    dependencies:
+      '@popperjs/core': 2.11.6
+      mini-svg-data-uri: 1.4.4
+    dev: true
+
   /follow-redirects/1.15.2:
     resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
     engines: {node: '>=4.0'}
@@ -571,10 +582,6 @@ packages:
   /lilconfig/2.0.6:
     resolution: {integrity: sha512-9JROoBW7pobfsx+Sq2JsASvCo6Pfo6WWoUW79HuB1BCoBXD4PLWJPqDF6fNj67pqBYTbAHkE57M1kS/+L1neOg==}
     engines: {node: '>=10'}
-    dev: true
-
-  /lodash/4.17.21:
-    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
     dev: true
 
   /merge2/1.4.1:

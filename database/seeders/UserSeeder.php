@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
         }
 
         // Create 5 users
-        $users = collect([$user, ...User::factory(4)->create()]);
+        $users = collect([$user, ...User::factory(9)->create()]);
 
         // Create an event and attach 5 users to it
         $event->users()->attach($users->pluck('id'));
