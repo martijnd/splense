@@ -11,7 +11,7 @@
     </x-slot>
 
     <div class="px-4 py-6 mx-auto max-w-7xl">
-        <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+        <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             @foreach ($events as $event)
                 <a href="{{ route('events.show', $event->id) }}">
                     <div

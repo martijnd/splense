@@ -10,23 +10,27 @@
                 @endif
             </h2>
             <div class="flex space-x-2">
-                @if (!$event->closed_at && $event->user_id === auth()->id())
+                @if (!$event->closed_at)
                     <x-button.secondary href="{{ route('events.expenses.create', $event->id) }}">
                         Add an expense
                     </x-button.secondary>
-                    <form action="{{ route('events.close', $event) }}" method="POST">
-                        @csrf
-                        <x-button.danger type="submit">
-                            Close event
-                        </x-button.danger>
-                    </form>
-                @else
-                    <form action="{{ route('events.open', $event) }}" method="POST">
-                        @csrf
-                        <x-button.danger type="submit" outlined>
-                            Re-open event
-                        </x-button.danger>
-                    </form>
+                @endif
+                @if ($event->user_id === auth()->id())
+                    @if ($event->closed_at)
+                        <form action="{{ route('events.open', $event) }}" method="POST">
+                            @csrf
+                            <x-button.danger type="submit" outlined>
+                                Re-open event
+                            </x-button.danger>
+                        </form>
+                    @else
+                        <form action="{{ route('events.close', $event) }}" method="POST">
+                            @csrf
+                            <x-button.danger type="submit">
+                                Close event
+                            </x-button.danger>
+                        </form>
+                    @endif
                 @endif
             </div>
         </div>
