@@ -31,9 +31,9 @@ class UserSeeder extends Seeder
         $event = Event::factory()
             ->create(['user_id' => $user->id]);
 
-        if (App::environment('production')) {
-            return;
-        }
+        // if (App::environment('production')) {
+        //     return;
+        // }
 
         // Create users
         $users = collect([$user, $user2, ...User::factory(9)->create()]);
