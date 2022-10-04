@@ -7,7 +7,7 @@
         </div>
     </x-slot>
 
-    <div class="px-4 py-6 mx-auto max-w-7xl">
+    <div class="px-4 py-6 mx-auto max-w-7xl min-h-screen">
         hello
     </div>
 </x-guest-layout>

@@ -1,5 +1,4 @@
-<nav x-data="{ open: false }"
-    class="bg-white dark:bg-gray-700 dark:text-white border-b border-gray-100 dark:border-gray-900">
+<nav id="navigation-bar" x-data="{ open: false }" class="w-full dark:text-white sticky top-0 transition-all">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -13,7 +12,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex items-center">
-                    <h2>{{ config('app.name') }}</h2>
+                    <h2 class="">{{ config('app.name') }}</h2>
                 </div>
             </div>
 
