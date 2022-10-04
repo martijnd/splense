@@ -16,8 +16,13 @@
 </head>
 
 <body>
-    <div class="font-sans text-gray-900 antialiased">
-        {{ $slot }}
+    <div class="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-700">
+        @include('layouts.navigation-guest')
+
+        <main class="flex-grow">
+            {{ $slot }}
+        </main>
+        <x-footer></x-footer>
     </div>
 </body>
 
