@@ -10,11 +10,8 @@
                 @endif
             </h2>
             <div class="flex space-x-2">
-                @if (!$event->closed_at)
-                    <x-button.secondary href="{{ route('events.expenses.create', $event->id) }}">
-                        Add an expense
-                    </x-button.secondary>
-                @endif
+                <x-button.secondary href="{{ route('events.show.result', $event->id) }}">Results
+                </x-button.secondary>
                 @if ($event->user_id === auth()->id())
                     @if ($event->closed_at)
                         <form action="{{ route('events.open', $event) }}" method="POST">
@@ -42,8 +39,11 @@
                 <div class="p-6">
                     <div class="flex items-center justify-between">
                         <h2 class="mb-2 text-xl font-semibold">Expenses</h2>
-                        <x-button.secondary href="{{ route('events.show.result', $event->id) }}">Results
-                        </x-button.secondary>
+                        @if (!$event->closed_at)
+                            <x-button.secondary href="{{ route('events.expenses.create', $event->id) }}">
+                                Add an expense
+                            </x-button.secondary>
+                        @endif
                     </div>
                     <div>
 
