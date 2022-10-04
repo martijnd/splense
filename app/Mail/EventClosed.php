@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Models\Event;
+use App\Services\ExpenseCalculator;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -33,7 +34,8 @@ class EventClosed extends Mailable
     {
         $url = route('events.show.result', $this->event->id);
 
-        $pdf = Pdf::loadView('pdfs.closed-event', ['title' => 'TEST']);
+        $users = ExpenseCalculator::calculate($this->event);
+        $pdf = Pdf::loadView('pdfs.closed-event', ['event' => $this->event, 'users' => $users]);
 
         return $this->markdown('emails.events.closed', ['url' => $url])
             ->attachData($pdf->output(), 'TEST.pdf', [
