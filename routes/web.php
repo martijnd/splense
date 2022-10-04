@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\PDFController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/events/{event}/open', [EventController::class, 'open'])->name('events.open');
     Route::get('/events/{event}/expenses/create', [ExpenseController::class, 'create'])->name('events.expenses.create');
     Route::post('/events/{event}/expenses', [ExpenseController::class, 'store'])->name('events.expenses.store');
+
+
+    if (!App::environment('production')) {
+        Route::get('/pdfs/{event}/closed-event', [PDFController::class, 'closedEvent']);
+    }
 });
 
 require __DIR__ . '/auth.php';

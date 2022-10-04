@@ -6,6 +6,7 @@ use App\Models\Event;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class EventClosed extends Mailable
 {
@@ -32,7 +33,12 @@ class EventClosed extends Mailable
     {
         $url = route('events.show.result', $this->event->id);
 
+        $pdf = Pdf::loadView('pdfs.closed-event', ['title' => 'TEST']);
+
         return $this->markdown('emails.events.closed', ['url' => $url])
+            ->attachData($pdf->output(), 'TEST.pdf', [
+                'mime' => 'application/pdf',
+            ])
             ->subject('\'' . $this->event->title . '\' has been closed. - ' . config('app.name'));
     }
 }
