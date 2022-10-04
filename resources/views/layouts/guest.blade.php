@@ -77,7 +77,7 @@
 
         window.onscroll = (e) => {
             const navbar = document.getElementById('navigation-bar');
-            const classes = ['shadow-lg', 'backdrop-blur-md'];
+            const classes = ['shadow-lg', 'backdrop-blur'];
             if (window.scrollY > 0) {
                 classes.forEach(c =>
                     navbar.classList.add(c)
