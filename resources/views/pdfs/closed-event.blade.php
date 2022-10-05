@@ -14,8 +14,11 @@
         body {
             font-family: "Inter";
         }
+
+        .page-break {
+            page-break-after: always;
+        }
     </style>
-    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
